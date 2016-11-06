@@ -4,6 +4,9 @@
 *.obj
 *.elf
 
+# ignore the target
+c2048
+
 # Precompiled Headers
 *.gch
 *.pch
