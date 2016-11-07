@@ -2,8 +2,8 @@
  * File    : misc.h
  * Author  : Quan Zhuo <zhuo.quan@outlook.com>
  * Purpose : 包含函数声明，宏定义等
- * Created : Sun 06 Nov 2016 05:55:20 PM CST 
- *   
+ * Created : Sun 06 Nov 2016 05:55:20 PM CST
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of the
@@ -21,6 +21,8 @@
  *************************************************************************
  */
 
+#include <stdbool.h>
+
 #define TABLE_HEIGHT 17
 #define TABLE_LENGTH 29
 
@@ -36,7 +38,10 @@ void up_remove_blank();
 void down_remove_blank();
 void left_remove_blank();
 void right_remove_blank();
-void up();
-void down();
-void left();
-void right();
+bool up();
+bool down();
+bool left();
+bool right();
+void insert_a_digit();
+bool changed(int (*)[4], int (*)[4]);
+void copy_arr(int (*)[4], int (*)[4]);
