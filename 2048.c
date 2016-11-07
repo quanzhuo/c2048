@@ -4,11 +4,10 @@
 #include <stdio.h>
 #include "misc.h"
 
-int data[16] = {0};
+int data[4][4] = {0};
 
 int main(int argc, char **argv) {
   int start_x, start_y, len_x, len_y;
-
   
   initscr();
 
@@ -20,19 +19,13 @@ int main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
 
+  noecho();
   start_x = (COLS - TABLE_LENGTH) / 2;
   start_y = (LINES - TABLE_HEIGHT) / 2;
 
-  
-
   init_table(start_y, start_x);
-  
   refresh();
-
   run(start_y, start_x);
-
-  sleep(100);
-  
   endwin();
   exit(EXIT_SUCCESS);
  }

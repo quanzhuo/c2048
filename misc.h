@@ -24,11 +24,19 @@
 #define TABLE_HEIGHT 17
 #define TABLE_LENGTH 29
 
-extern int data[16];
+extern int data[4][4];
 
 void init_table(int start_y, int start_x);
-int random_location(int *ptr);
+int random_location();
 void show(int start_y, int start_x);
 void run(int, int);
 int my_random();
 void process(int key);
+void up_remove_blank();
+void down_remove_blank();
+void left_remove_blank();
+void right_remove_blank();
+void up();
+void down();
+void left();
+void right();
