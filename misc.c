@@ -27,6 +27,8 @@
 #include <string.h>
 #include <time.h>
 
+#include <stdio.h>
+
 void init_table(int start_y, int start_x) {
   insert_a_digit();
   insert_a_digit();
@@ -111,6 +113,7 @@ void run(int start_y, int start_x) {
         insert_a_digit();
       break;
     }
+	erase();
     show(start_y, start_x);
     refresh();
   }
@@ -194,6 +197,10 @@ bool up() {
     }
   }
   up_remove_blank();
+  
+  fprintf(log_file, "%s\n", "after pressed up key: ---------------");
+  print();
+  
   if (changed(before_up, data))
     return true;
   else
@@ -222,6 +229,10 @@ bool down() {
     }
   }
   down_remove_blank();
+  
+  fprintf(log_file, "%s\n", "after pressed down key: ---------------");
+  print();
+  
   if (changed(before_down, data))
     return true;
   else
@@ -249,6 +260,10 @@ bool left() {
     }
   }
   left_remove_blank();
+  
+  fprintf(log_file, "%s\n", "after pressed left key: ---------------");
+  print();
+  
   if (changed(before_left, data))
     return true;
   else
@@ -276,6 +291,10 @@ bool right() {
     }
   }
   right_remove_blank();
+  
+  fprintf(log_file, "%s\n", "after pressed right key: ---------------");
+  print();
+  
   if (changed(before_right, data))
     return true;
   else
@@ -304,4 +323,12 @@ bool changed(int a[][4], int b[][4]) {
     }
   }
   return false;
+}
+
+void print() {
+	for(int y=0; y<4; y++) {
+		for(int x=0; x<4; x++)
+			fprintf(log_file, "%d\t", data[y][x]);
+		fprintf(log_file, "\n");
+	}
 }

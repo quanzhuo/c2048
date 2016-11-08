@@ -7,6 +7,9 @@
 # ignore the target
 c2048
 
+# ignore debug log
+.move_log
+
 # Precompiled Headers
 *.gch
 *.pch

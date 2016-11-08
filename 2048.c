@@ -5,6 +5,7 @@
 #include "misc.h"
 
 int data[4][4] = {0};
+FILE *log_file = NULL;
 
 int main(int argc, char **argv) {
   int start_x, start_y, len_x, len_y;
@@ -24,8 +25,11 @@ int main(int argc, char **argv) {
   start_y = (LINES - TABLE_HEIGHT) / 2;
 
   init_table(start_y, start_x);
+  log_file = fopen(".move_log", "w+");
   refresh();
   run(start_y, start_x);
+  
+  fclose(log_file);
   endwin();
   exit(EXIT_SUCCESS);
  }

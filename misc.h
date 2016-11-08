@@ -23,10 +23,13 @@
 
 #include <stdbool.h>
 
+#include <stdio.h>
+
 #define TABLE_HEIGHT 17
 #define TABLE_LENGTH 29
 
 extern int data[4][4];
+extern FILE *log_file;
 
 void init_table(int start_y, int start_x);
 int random_location();
@@ -45,3 +48,4 @@ bool right();
 void insert_a_digit();
 bool changed(int (*)[4], int (*)[4]);
 void copy_arr(int (*)[4], int (*)[4]);
+void print();
