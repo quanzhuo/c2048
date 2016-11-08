@@ -28,6 +28,7 @@ int main(int argc, char **argv) {
   init_table(start_y, start_x);
   
   refresh();
+  keypad(stdscr, true);
   run(start_y, start_x);
   
   fclose(log_file);
