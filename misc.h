@@ -49,3 +49,4 @@ void insert_a_digit();
 bool changed(int (*)[4], int (*)[4]);
 void copy_arr(int (*)[4], int (*)[4]);
 void print();
+bool can_move();

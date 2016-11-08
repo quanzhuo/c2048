@@ -26,6 +26,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
 
 #include <stdio.h>
 
@@ -115,6 +116,13 @@ void run(int start_y, int start_x) {
       if (right())
         insert_a_digit();
       break;
+	case 'm':
+	  flash();
+	  mvprintw(start_y-1, start_x, "Challenge Failed !, will quit in 5 seconds, Please try again !");
+	  refresh();
+	  sleep(5);
+	  return;
+	  break;
     }
 	erase();
     show(start_y, start_x);
@@ -309,6 +317,15 @@ void insert_a_digit() {
   int y = linear_index / 4;
   int x = linear_index % 4;
   data[y][x] = 2;
+  if(!can_move()) {
+	flash();
+	mvprintw(0, 0, "Challenge Failed !, quit in 50 seconds!");
+	refresh();
+	sleep(50);
+	endwin();
+	fclose(log_file);
+	exit(0);
+  }
 }
 
 void copy_arr(int src[][4], int dst[][4]) {
@@ -334,4 +351,27 @@ void print() {
 			fprintf(log_file, "%d\t", data[y][x]);
 		fprintf(log_file, "\n");
 	}
+}
+
+bool can_move() {
+  for(int y=0; y<4; y++) {
+	for(int x=0; x<4; x++)
+	  if (!data[y][x])
+		return true;
+  }
+  for(int y=0; y<4; y++) {
+	for(int x=0; x<4; x++) {
+	  int h,v;
+	  int left, right, down, up;
+	  // left
+	  if (x>0 && data[y][x-1] == data[y][x]) return true;
+	  // right
+	  if (x<3 && data[y][x+1] == data[y][x]) return true;
+	  // up
+	  if (y>0 && data[y-1][x] == data[y][x]) return true;
+	  // down
+	  if (y<3 && data[y+1][x] == data[y][x]) return true;
+	}
+  }
+  return false;
 }
