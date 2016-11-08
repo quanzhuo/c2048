@@ -75,7 +75,10 @@ void show(int start_y, int start_x) {
       int linear_index = 4 * y + x;
       int vy = linear_index / 4;
       int vx = linear_index % 4;
-      mvprintw(start_y + 2 + y * 4, start_x + 2 + x * 7, "%d", data[vy][vx]);
+	  if (!data[vy][vx]) 
+		continue;
+	  else
+        mvprintw(start_y + 2 + y * 4, start_x + 2 + x * 7, "%d", data[vy][vx]);
     }
 }
 
