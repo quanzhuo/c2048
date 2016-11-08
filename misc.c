@@ -41,10 +41,15 @@ int random_location() {
   int index = 0;
   int count = 0;
 
-  while (index++ <= 15)
-    if (data[index / 4][index % 4] == 0)
+  while (index <= 15) {
+	if (data[index / 4][index % 4] == 0)
       count++;
-
+    index++;
+  }
+    
+  
+  fprintf(log_file, "cout= %d\n", count);
+  
   int empty_location[count];
   memset(empty_location, 0, sizeof empty_location);
   index = 0;
@@ -57,6 +62,10 @@ int random_location() {
     }
     index++;
   }
+  
+  fprintf(log_file, "cout: %d\n", count);
+  print();
+  fflush(log_file);
 
   return empty_location[my_random() % count];
 }

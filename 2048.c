@@ -24,8 +24,9 @@ int main(int argc, char **argv) {
   start_x = (COLS - TABLE_LENGTH) / 2;
   start_y = (LINES - TABLE_HEIGHT) / 2;
 
-  init_table(start_y, start_x);
   log_file = fopen(".move_log", "w+");
+  init_table(start_y, start_x);
+  
   refresh();
   run(start_y, start_x);
   
