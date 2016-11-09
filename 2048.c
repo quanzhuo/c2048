@@ -7,6 +7,8 @@
 int data[4][4] = {0};
 FILE *log_file = NULL;
 
+int g_start_y, g_start_x;
+
 int main(int argc, char **argv) {
   int start_x, start_y, len_x, len_y;
   
@@ -23,6 +25,8 @@ int main(int argc, char **argv) {
   noecho();
   start_x = (COLS - TABLE_LENGTH) / 2;
   start_y = (LINES - TABLE_HEIGHT) / 2;
+  g_start_x = start_x;
+  g_start_y = start_y;
 
   log_file = fopen(".move_log", "w+");
   init_table(start_y, start_x);

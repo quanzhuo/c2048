@@ -30,6 +30,7 @@
 
 extern int data[4][4];
 extern FILE *log_file;
+extern int g_start_x, g_start_y;
 
 void init_table(int start_y, int start_x);
 int random_location();

@@ -125,16 +125,9 @@ void run(int start_y, int start_x) {
       if (right())
         insert_a_digit();
       break;
-	case 'm':
-	  flash();
-	  mvprintw(start_y-1, start_x, "Challenge Failed !, will quit in 5 seconds, Please try again !");
-	  refresh();
-	  sleep(5);
-	  return;
-	  break;
     }
 	erase();
-    show(start_y, start_x);
+    show(g_start_y, g_start_x);
     refresh();
   }
 }
@@ -327,8 +320,10 @@ void insert_a_digit() {
   int x = linear_index % 4;
   data[y][x] = 2;
   if(!can_move()) {
+	erase();
+	show(g_start_y, g_start_x);
 	flash();
-	mvprintw(0, 0, "Challenge Failed !, quit in 50 seconds!");
+	mvprintw(0, 0, "Cannot move anymore, Challenge Failed ! quit in 50 seconds!");
 	refresh();
 	sleep(50);
 	endwin();
