@@ -1,7 +1,7 @@
 /*************************************************************************
- * File    : misc.h
+ * File    : move.h
  * Author  : Quan Zhuo <zhuo.quan@outlook.com>
- * Purpose : 包含函数声明，宏定义等
+ * Purpose : contains function and macro declaration
  * Created : Sun 06 Nov 2016 05:55:20 PM CST
  *
  * This program is free software; you can redistribute it and/or

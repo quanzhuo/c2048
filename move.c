@@ -1,7 +1,7 @@
 /*************************************************************************
- * File    : misc.c
+ * File    : move.c
  * Author  : Quan Zhuo <zhuo.quan@outlook.com>
- * Purpose : 一些杂七杂八的辅助函数
+ * Purpose : functions for move digits in table
  * Created : Sun 06 Nov 2016 05:54:47 PM CST
  *
  * This program is free software; you can redistribute it and/or
@@ -21,7 +21,7 @@
  *************************************************************************
  */
 
-#include "misc.h"
+#include "move.h"
 #include <curses.h>
 #include <stdlib.h>
 #include <string.h>

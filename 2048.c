@@ -2,7 +2,7 @@
 #include <curses.h>
 #include <unistd.h>
 #include <stdio.h>
-#include "misc.h"
+#include "move.h"
 
 int data[4][4] = {0};
 FILE *log_file = NULL;

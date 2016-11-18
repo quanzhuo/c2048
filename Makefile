@@ -19,7 +19,7 @@
 #   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 # 
 
-CFLAGS := -g
+CFLAGS := -g -std=c99
 
 objects := $(patsubst %.c, %.o, $(wildcard *.c))
 
