@@ -33,6 +33,8 @@
 void init_table() {
   insert_a_digit();
   insert_a_digit();
+  // hide the cursor
+  curs_set(0);
   show();
 }
 
