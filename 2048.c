@@ -7,11 +7,9 @@
 int data[4][4] = {0};
 FILE *log_file = NULL;
 
-int g_start_y, g_start_x;
+int start_y, start_x;
 
-int main(int argc, char **argv) {
-  int start_x, start_y, len_x, len_y;
-  
+int main(int argc, char **argv) {  
   initscr();
 
   if (LINES-1 < TABLE_HEIGHT || COLS - 1 < TABLE_LENGTH) {
@@ -25,17 +23,51 @@ int main(int argc, char **argv) {
   noecho();
   start_x = (COLS - TABLE_LENGTH) / 2;
   start_y = (LINES - TABLE_HEIGHT) / 2;
-  g_start_x = start_x;
-  g_start_y = start_y;
-
+  
   log_file = fopen(".move_log", "w+");
-  init_table(start_y, start_x);
+  init_table();
   
   refresh();
   keypad(stdscr, true);
-  run(start_y, start_x);
+  run();
   
   fclose(log_file);
   endwin();
   exit(EXIT_SUCCESS);
  }
+
+ 
+ void run() {
+  int key;
+  while ((key = getch()) != 'q') {
+    switch (key) {
+    case KEY_UP:
+    case 'w':
+    case 'W':
+      if (up())
+        insert_a_digit();
+      break;
+    case KEY_DOWN:
+    case 's':
+    case 'S':
+      if (down())
+        insert_a_digit();
+      break;
+    case KEY_LEFT:
+    case 'a':
+    case 'A':
+      if (left())
+        insert_a_digit();
+      break;
+    case KEY_RIGHT:
+    case 'd':
+    case 'D':
+      if (right())
+        insert_a_digit();
+      break;
+    }
+	erase();
+    show();
+    refresh();
+  }
+}

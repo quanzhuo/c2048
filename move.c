@@ -30,10 +30,10 @@
 
 #include <stdio.h>
 
-void init_table(int start_y, int start_x) {
+void init_table() {
   insert_a_digit();
   insert_a_digit();
-  show(start_y, start_x);
+  show();
 }
 
 // return a random location (0-15) in data table which is 0
@@ -46,9 +46,6 @@ int random_location() {
       count++;
     index++;
   }
-    
-  
-  fprintf(log_file, "cout= %d\n", count);
   
   int empty_location[count];
   memset(empty_location, 0, sizeof empty_location);
@@ -62,15 +59,10 @@ int random_location() {
     }
     index++;
   }
-  
-  fprintf(log_file, "cout: %d\n", count);
-  print();
-  fflush(log_file);
-
   return empty_location[my_random() % count];
 }
 
-void show(int start_y, int start_x) {
+void show() {
   // draw h-lines
   for (int i = 0; i < 5; i++)
     mvhline(start_y + i * 4, start_x, '-', TABLE_LENGTH);
@@ -95,41 +87,6 @@ void show(int start_y, int start_x) {
 int my_random() {
   srand(time(NULL));
   return rand();
-}
-
-void run(int start_y, int start_x) {
-  int key;
-  while ((key = getch()) != 'q') {
-    switch (key) {
-    case KEY_UP:
-    case 'w':
-    case 'W':
-      if (up())
-        insert_a_digit();
-      break;
-    case KEY_DOWN:
-    case 's':
-    case 'S':
-      if (down())
-        insert_a_digit();
-      break;
-    case KEY_LEFT:
-    case 'a':
-    case 'A':
-      if (left())
-        insert_a_digit();
-      break;
-    case KEY_RIGHT:
-    case 'd':
-    case 'D':
-      if (right())
-        insert_a_digit();
-      break;
-    }
-	erase();
-    show(g_start_y, g_start_x);
-    refresh();
-  }
 }
 
 void up_remove_blank() {
@@ -189,6 +146,9 @@ void right_remove_blank() {
   }
 }
 
+// move all the digit to up.
+// if the table changed, return true, else false.
+// the logic of down, left, right are the same.
 bool up() {
   int before_up[4][4];
   copy_arr(data, before_up);
@@ -210,9 +170,6 @@ bool up() {
     }
   }
   up_remove_blank();
-  
-  fprintf(log_file, "%s\n", "after pressed up key: ---------------");
-  print();
   
   if (changed(before_up, data))
     return true;
@@ -243,9 +200,6 @@ bool down() {
   }
   down_remove_blank();
   
-  fprintf(log_file, "%s\n", "after pressed down key: ---------------");
-  print();
-  
   if (changed(before_down, data))
     return true;
   else
@@ -274,9 +228,6 @@ bool left() {
   }
   left_remove_blank();
   
-  fprintf(log_file, "%s\n", "after pressed left key: ---------------");
-  print();
-  
   if (changed(before_left, data))
     return true;
   else
@@ -304,10 +255,7 @@ bool right() {
     }
   }
   right_remove_blank();
-  
-  fprintf(log_file, "%s\n", "after pressed right key: ---------------");
-  print();
-  
+ 
   if (changed(before_right, data))
     return true;
   else
@@ -321,13 +269,12 @@ void insert_a_digit() {
   data[y][x] = 2;
   if(!can_move()) {
 	erase();
-	show(g_start_y, g_start_x);
+	show();
 	flash();
-	mvprintw(0, 0, "Cannot move anymore, Challenge Failed ! quit in 50 seconds!");
+	mvprintw(0, 0, "Cannot move anymore, Challenge Failed ! Quit in 5 seconds!");
 	refresh();
-	sleep(50);
+	sleep(5);
 	endwin();
-	fclose(log_file);
 	exit(0);
   }
 }
@@ -347,14 +294,6 @@ bool changed(int a[][4], int b[][4]) {
     }
   }
   return false;
-}
-
-void print() {
-	for(int y=0; y<4; y++) {
-		for(int x=0; x<4; x++)
-			fprintf(log_file, "%d\t", data[y][x]);
-		fprintf(log_file, "\n");
-	}
 }
 
 bool can_move() {

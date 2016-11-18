@@ -29,13 +29,12 @@
 #define TABLE_LENGTH 29
 
 extern int data[4][4];
-extern FILE *log_file;
-extern int g_start_x, g_start_y;
+extern int start_y, start_x;
 
-void init_table(int start_y, int start_x);
+void init_table();
 int random_location();
-void show(int start_y, int start_x);
-void run(int, int);
+void show();
+void run();
 int my_random();
 void process(int key);
 void up_remove_blank();
