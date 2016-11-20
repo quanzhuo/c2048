@@ -5,8 +5,6 @@
 #include "move.h"
 
 int data[4][4] = {0};
-FILE *log_file = NULL;
-
 int start_y, start_x;
 
 int main(int argc, char **argv) {  
@@ -24,14 +22,12 @@ int main(int argc, char **argv) {
   start_x = (COLS - TABLE_LENGTH) / 2;
   start_y = (LINES - TABLE_HEIGHT) / 2;
   
-  log_file = fopen(".move_log", "w+");
   init_table();
   
   refresh();
   keypad(stdscr, true);
   run();
   
-  fclose(log_file);
   endwin();
   exit(EXIT_SUCCESS);
  }
